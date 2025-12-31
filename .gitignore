@@ -1,0 +1,26 @@
+# Datasets
+train/
+test/
+valid/
+*.zip
+data.yaml
+
+# Models
+*.pt
+*.h5
+*.onnx
+
+# Secrets
+.env
+
+# Editor / Cache
+__pycache__/
+.vscode/
+node_modules/
+
+# Media files
+*.mp4
+*.avi
+*.mov
+*.mkv
+

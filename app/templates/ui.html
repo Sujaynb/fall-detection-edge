@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Live Stream</title></head>
+<body>
+  <h2>Live Stream</h2>
+
+  {% if ip %}
+    <img src="{{ url_for('stream_video', ip=ip) }}" width="800" />
+    <p>Streaming from: {{ ip }}</p>
+
+  {% else %}
+    <img src="{{ url_for('webcam_stream') }}" width="800" />
+    <p>Streaming from local webcam</p>
+  {% endif %}
+
+  <p><a href="{{ url_for('home') }}">Back</a></p>
+</body>
+</html>
