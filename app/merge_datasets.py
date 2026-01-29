@@ -2,16 +2,16 @@ import os
 import shutil
 from tqdm import tqdm
 
-# -------------------------------
-# CONFIGURE YOUR PATHS HERE
-# -------------------------------
-FALL_DATASET = r"D:\Major Project\Adataset"       # class 0
-NONFALL_DATASET = r"D:\Major Project\Hdataset"    # class 1
+                                 
+                           
+                                 
+FALL_DATASET = r"D:\Major Project\Adataset"                
+NONFALL_DATASET = r"D:\Major Project\Hdataset"             
 OUTPUT_DATASET = r"D:\Major Project\RDataSet"
 
-# --------------------------------
-# INTERNAL FUNCTIONS
-# --------------------------------
+                                  
+                    
+                                  
 
 def ensure_dirs(base):
     for split in ["train", "valid", "test"]:
@@ -28,7 +28,7 @@ def get_label_path(img_path):
 def remap_label(label_path, new_class_id):
     """Rewrite the class ID for each label file."""
     if not os.path.exists(label_path):
-        # Create empty label if missing
+                                       
         with open(label_path, "w") as f:
             pass
         return
@@ -38,7 +38,7 @@ def remap_label(label_path, new_class_id):
         for line in f.readlines():
             parts = line.strip().split()
             if len(parts) == 5:
-                parts[0] = str(new_class_id)  # replace class ID
+                parts[0] = str(new_class_id)                    
                 updated_lines.append(" ".join(parts))
 
     with open(label_path, "w") as f:
@@ -55,26 +55,26 @@ def copy_dataset(src, dst, class_id):
 
         for file in tqdm(os.listdir(src_img), desc=f"Merging {split} from {src}"):
             src_img_path = os.path.join(src_img, file)
-            new_file = file.replace(" ", "_")  # avoid space issues
+            new_file = file.replace(" ", "_")                      
             dst_img_path = os.path.join(dst_img, new_file)
 
-            # Copy image
+                        
             shutil.copy2(src_img_path, dst_img_path)
 
-            # Handle label
+                          
             src_label_path = get_label_path(src_img_path)
             dst_label_path = get_label_path(dst_img_path)
 
             if src_label_path and os.path.exists(src_label_path):
                 shutil.copy2(src_label_path, dst_label_path)
 
-            # Remap label class ID
+                                  
             remap_label(dst_label_path, class_id)
 
 
-# ------------------------------
-# MAIN PIPELINE
-# ------------------------------
+                                
+               
+                                
 print("\n🔧 Setting up output dataset structure...")
 ensure_dirs(OUTPUT_DATASET)
 

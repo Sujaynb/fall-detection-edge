@@ -39,7 +39,7 @@ def clean_split(split_path):
         img_path = os.path.join(images_path, file)
         label_path = os.path.join(labels_path, file.replace(".jpg", ".txt").replace(".png", ".txt"))
 
-        # Delete corrupt images
+                               
         if is_image_corrupt(img_path):
             os.remove(img_path)
             if os.path.exists(label_path):
@@ -47,19 +47,19 @@ def clean_split(split_path):
             corrupt_count += 1
             continue
 
-        # Load and enhance
+                          
         img = cv2.imread(img_path)
         img = ensure_rgb(img)
         img = fix_image_dimensions(img)
 
-        # Overwrite cleaned image
+                                 
         cv2.imwrite(img_path, img)
 
-        # Ensure label file exists
+                                  
         if not os.path.exists(label_path):
             missing_label_count += 1
             with open(label_path, "w") as f:
-                pass  # create empty label (later can be removed)
+                pass                                             
 
     return corrupt_count, missing_label_count
 
